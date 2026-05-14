@@ -14,7 +14,8 @@ rednet.open("back")
 
 rednet.send(BANK_ID, {cmd = "GET_UPDATE", player = os.getComputerLabel() or "Unknown"})
 
-local _, response = rednet.receive(BANK_ID, 8)
+-- Fixed line below
+local _, response = rednet.receive(nil, 8)   -- nil = any protocol, 8 = timeout in seconds
 
 if response and response.files then
     print("Downloading updates...")
@@ -32,9 +33,11 @@ if response and response.files then
                 file.write(code)
                 file.close()
                 print("Updated")
+            else
+                print("!!! Empty file")
             end
         else
-            print("!!! Failed")
+            print("!!! Download failed")
         end
     end
     
@@ -42,10 +45,11 @@ if response and response.files then
     os.sleep(1)
     
     if response.restart then
+        print("Starting bank_client...")
         shell.run("bank_client")
     end
 else
-    print("No update available.")
-    os.sleep(1)
+    print("No update available or bank offline.")
+    os.sleep(1.5)
     shell.run("bank_client")
 end
