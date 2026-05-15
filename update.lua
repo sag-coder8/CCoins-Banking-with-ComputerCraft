@@ -1,4 +1,5 @@
 -- updater.lua - Self-Updatable Remote Updater
+-- Testing if this updates
 local BANK_ID = 3
 
 local function clear()
