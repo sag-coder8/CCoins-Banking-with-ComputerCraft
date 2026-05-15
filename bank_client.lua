@@ -1,5 +1,5 @@
 -- CCoins Client - Clean UI with Arrow Keys
-local BANK_ID = 3   -- <<< CHANGE TO YOUR BANK COMPUTER ID !!!
+local BANK_ID = 0   -- <<< CHANGE TO YOUR BANK COMPUTER ID !!!
 local PLAYER = os.getComputerLabel() or "Unknown"
 
 rednet.open("back")
